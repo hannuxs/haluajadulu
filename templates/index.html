@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+    <title>Upload CSV</title>
+</head>
+<body>
+    <h1>Upload File CSV</h1>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+            {% for msg in messages %}
+                <li>{{ msg }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".csv">
+        <input type="submit" value="Upload">
+    </form>
+
+    <h2>File:</h2>
+    <ul>
+    {% for row in files %}
+        <li>
+            {{ row[0] }}
+            <form method="POST" action="{{ url_for('delete_file', filename=row[0]) }}" style="display:inline;">
+                <input type="submit" value="Hapus">
+            </form>
+        </li>
+    {% endfor %}
+    </ul>
+</body>
+</html>
