@@ -54,7 +54,6 @@ def upload_file():
         flash('File berhasil di-upload')
         return redirect(request.url)
 
-    # Ambil file yang diupload oleh user
     cursor = mysql.connection.cursor()
     cursor.execute("SELECT file FROM upload WHERE id_user = %s", (CURRENT_USER_ID,))
     files = cursor.fetchall()
@@ -64,12 +63,10 @@ def upload_file():
 
 @app.route('/delete/<filename>', methods=['POST'])
 def delete_file(filename):
-    # Hapus file dari folder
     filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
     if os.path.exists(filepath):
         os.remove(filepath)
 
-    # Hapus dari database
     cursor = mysql.connection.cursor()
     cursor.execute("DELETE FROM upload WHERE file = %s", (filename,))
     mysql.connection.commit()

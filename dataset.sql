@@ -1,0 +1,1 @@
+SELECT c.kode_brng as kode_obat,a.suhu_tubuh,a.tensi,a.nadi,a.respirasi,a.tinggi,a.berat,a.spo2,a.gcs,a.kesadaran,a.keluhan,a.pemeriksaan,a.alergi,a.penilaian,a.rtl,a.instruksi,a.evaluasi FROM pemeriksaan_ranap a inner join resep_obat b on a.no_rawat=b.no_rawat INNER JOIN resep_dokter c on b.no_resep=c.no_resep GROUP by c.kode_brng,a.no_rawat,a.tgl_perawatan,a.jam_rawat;
